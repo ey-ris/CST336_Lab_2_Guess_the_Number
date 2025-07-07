@@ -68,7 +68,7 @@ function checkGuess() {
         document.querySelector("#guesses").textContent += guess + " ";
         document.querySelector("#attempts").textContent = allowedAttempts - attempts;
         if (attempts == allowedAttempts) {
-            feedback.textContent = "Sorry, you lost!";
+            feedback.textContent = "Sorry, you lost! The number was " + randomNumber;
             feedback.style.color = "red";
             totalLosses++;
             updateStatsDisplay();

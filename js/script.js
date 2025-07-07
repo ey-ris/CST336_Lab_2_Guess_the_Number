@@ -6,6 +6,9 @@ document.querySelector("#resetBtn").addEventListener("click", initializeGame);
 let randomNumber;
 let attempts = 0;
 
+// added this new global variable for ease of changing allowed attempts
+let allowedAttempts = 7;
+
 initializeGame();
 
 function initializeGame() {
@@ -28,6 +31,9 @@ function initializeGame() {
 
     // Clearing previous guesses
     document.querySelector("#guesses").textContent = "";
+
+    // Clearing previous attempts
+    document.querySelector("#attempts").textContent = allowedAttempts;
 }
 
 function checkGuess() {
@@ -47,10 +53,16 @@ function checkGuess() {
     if (guess == randomNumber) {
         feedback.textContent = "You guessed it! You Won!";
         feedback.style.color = "darkgreen";
+
+        // Displaying winning stats
+        document.querySelector("#guesses").textContent += guess + " ";
+        document.querySelector("#attempts").textContent = allowedAttempts - attempts;
+
         gameOver();
     } else {
         document.querySelector("#guesses").textContent += guess + " ";
-        if (attempts == 7) {
+        document.querySelector("#attempts").textContent = allowedAttempts - attempts;
+        if (attempts == allowedAttempts) {
             feedback.textContent = "Sorry, you lost!";
             feedback.style.color = "red";
             gameOver();
